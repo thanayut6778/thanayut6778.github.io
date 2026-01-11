@@ -1,481 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Code, 
-  BookOpen, 
-  GraduationCap, 
-  Briefcase, 
-  Cpu, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Award,
-  Terminal,
-  Monitor,
-  Wifi,
-  Users,
-  Menu,
-  X,
-  Facebook,
-  Linkedin
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - ว่าที่ครูคอมพิวเตอร์</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
 
-const App = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Handle Scroll Effect for Navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
-      
-      {/* Navigation Bar */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="bg-blue-600 text-white p-2 rounded-lg">
-              <Code size={24} />
-            </div>
-            <span className={`text-xl font-bold ${isScrolled ? 'text-slate-800' : 'text-slate-800 md:text-white'}`}>
-              Kru.Computer
-            </span>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8">
-            {['About', 'Education', 'Skills', 'Experience', 'Gallery', 'Contact'].map((item) => (
-              <button 
-                key={item} 
-                onClick={() => scrollToSection(item.toLowerCase())}
-                className={`font-medium hover:text-blue-500 transition-colors ${isScrolled ? 'text-slate-600' : 'text-white/90 hover:text-white'}`}
-              >
-                {item === 'About' ? 'ประวัติ' : 
-                 item === 'Education' ? 'การศึกษา' :
-                 item === 'Skills' ? 'ทักษะ' :
-                 item === 'Experience' ? 'ประสบการณ์' :
-                 item === 'Gallery' ? 'ผลงาน' : 'ติดต่อ'}
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button className="md:hidden text-slate-800" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X /> : <Menu className={isScrolled ? 'text-slate-800' : 'text-slate-800 md:text-white'} />}
-          </button>
+    <nav class="navbar">
+        <div class="logo">&lt;TeacherCode /&gt;</div>
+        <ul class="nav-links">
+            <li><a href="#home">หน้าแรก</a></li>
+            <li><a href="#about">ประวัติ</a></li>
+            <li><a href="#skills">ทักษะ</a></li>
+            <li><a href="#gallery">ผลงาน</a></li>
+            <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
         </div>
+    </nav>
 
-        {/* Mobile Dropdown */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t p-4 shadow-xl">
-            {['About', 'Education', 'Skills', 'Experience', 'Gallery', 'Contact'].map((item) => (
-              <button 
-                key={item} 
-                onClick={() => scrollToSection(item.toLowerCase())}
-                className="block w-full text-left py-3 text-slate-600 hover:text-blue-600 font-medium border-b border-slate-100 last:border-0"
-              >
-                 {item === 'About' ? 'ประวัติส่วนตัว' : 
-                 item === 'Education' ? 'การศึกษา' :
-                 item === 'Skills' ? 'ทักษะและความสามารถ' :
-                 item === 'Experience' ? 'ประสบการณ์ทำงาน' :
-                 item === 'Gallery' ? 'ผลงานและกิจกรรม' : 'ช่องทางติดต่อ'}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
-
-      {/* Hero Section */}
-      <header className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white overflow-hidden">
-        {/* Abstract Background Shapes */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-blue-400 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-cyan-400 rounded-full blur-3xl"></div>
-          <div className="grid grid-cols-12 gap-4 absolute w-full h-full p-8 opacity-20">
-             {[...Array(48)].map((_, i) => (
-               <div key={i} className="text-xs font-mono">{Math.random() > 0.5 ? '1' : '0'}</div>
-             ))}
-          </div>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>สวัสดีครับ, ผมชื่อ <span class="highlight">นายใจดี มีวิชา</span></h1>
+            <h2>ผมคือ <span class="typing-text"></span></h2>
+            <p>มุ่งมั่นที่จะนำเทคโนโลยีมาพัฒนาการเรียนรู้ของผู้เรียนสู่ศตวรรษที่ 21</p>
+            <a href="#contact" class="btn">ติดต่อผม</a>
+            <a href="#about" class="btn btn-outline">รู้จักผมเพิ่มเติม</a>
         </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 text-center md:text-left">
-              <div className="inline-block px-4 py-1.5 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold mb-6">
-                <span className="animate-pulse mr-2">●</span> พร้อมสำหรับการเป็นครูมืออาชีพ
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
-                สวัสดีครับ, ผมชื่อ <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                  นายธีระ สอนดี
-                </span>
-              </h1>
-              <h2 className="text-xl md:text-2xl text-slate-300 mb-6 font-light">
-                ว่าที่ครูผู้ช่วย (วิชาเอกคอมพิวเตอร์)
-              </h2>
-              <p className="text-slate-400 text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                "มุ่งมั่นพัฒนาผู้เรียนด้วยเทคโนโลยี สร้างสรรค์ห้องเรียนยุคใหม่ 
-                ที่เน้นการคิดวิเคราะห์และการลงมือทำจริง"
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <button onClick={() => scrollToSection('contact')} className="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-all shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2">
-                  <Mail size={20} /> ติดต่อผม
-                </button>
-                <button onClick={() => scrollToSection('gallery')} className="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg font-semibold backdrop-blur-sm transition-all flex items-center justify-center gap-2">
-                  <BookOpen size={20} /> ดูผลงาน
-                </button>
-              </div>
-            </div>
-
-            <div className="flex-1 relative">
-              {/* Profile Image Container with Tech Vibe */}
-              <div className="relative w-72 h-72 md:w-96 md:h-96 mx-auto">
-                <div className="absolute inset-0 border-2 border-dashed border-blue-400/30 rounded-full animate-spin-slow"></div>
-                <div className="absolute inset-4 bg-gradient-to-tr from-blue-600 to-cyan-500 rounded-full shadow-2xl overflow-hidden border-4 border-slate-800">
-                  <img 
-                    src="https://api.dicebear.com/9.x/avataaars/svg?seed=TeacherAlex&clothing=blazerAndShirt&accessories=glasses" 
-                    alt="Profile" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                {/* Floating Badge */}
-                <div className="absolute -bottom-4 -right-4 bg-white text-slate-900 p-4 rounded-xl shadow-xl flex items-center gap-3 animate-bounce-slow">
-                  <div className="bg-green-100 p-2 rounded-full">
-                    <Terminal className="text-green-600" size={24} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 font-bold">Coding Skill</p>
-                    <p className="font-bold text-blue-600">Advanced</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="hero-img">
+            <img src="https://via.placeholder.com/400" alt="Profile Picture">
         </div>
-      </header>
+    </section>
 
-      {/* About Me Section (Terminal Style) */}
-      <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col lg:flex-row gap-12 items-center">
-            
-            {/* Visual Part */}
-            <div className="lg:w-1/2 w-full">
-              <div className="bg-slate-900 rounded-xl shadow-2xl overflow-hidden border border-slate-700">
-                <div className="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  <span className="ml-2 text-xs text-slate-400 font-mono">profile.json — teacher-portfolio</span>
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">ประวัติการศึกษาและการทำงาน</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="circle-dot"></div>
+                    <h3 class="timeline-date">2562 - 2566</h3>
+                    <h4 class="timeline-title">ครุศาสตรบัณฑิต (คอมพิวเตอร์ศึกษา)</h4>
+                    <p class="timeline-text">มหาวิทยาลัยราชภัฏ... (เกียรตินิยมอันดับ 1)</p>
                 </div>
-                <div className="p-6 font-mono text-sm md:text-base overflow-x-auto">
-                  <div className="text-blue-400">const <span className="text-yellow-400">teacherProfile</span> = {'{'}</div>
-                  <div className="pl-6 text-emerald-400">name: <span className="text-orange-300">"ธีระ สอนดี"</span>,</div>
-                  <div className="pl-6 text-emerald-400">role: <span className="text-orange-300">"ครูคอมพิวเตอร์"</span>,</div>
-                  <div className="pl-6 text-emerald-400">passion: <span className="text-orange-300">"EdTech & Coding"</span>,</div>
-                  <div className="pl-6 text-emerald-400">location: <span className="text-orange-300">"ประเทศไทย"</span>,</div>
-                  <div className="pl-6 text-emerald-400">soft_skills: [</div>
-                  <div className="pl-12 text-orange-300">"Communication",</div>
-                  <div className="pl-12 text-orange-300">"Empathy",</div>
-                  <div className="pl-12 text-orange-300">"Active Learning"</div>
-                  <div className="pl-6 text-emerald-400">]</div>
-                  <div className="text-blue-400">{'}'};</div>
+                <div class="timeline-item">
+                    <div class="circle-dot"></div>
+                    <h3 class="timeline-date">2566</h3>
+                    <h4 class="timeline-title">ฝึกประสบการณ์วิชาชีพครู</h4>
+                    <p class="timeline-text">โรงเรียน... สอนวิชาวิทยาการคำนวณ ระดับชั้น ม.1 - ม.3</p>
                 </div>
-              </div>
             </div>
-
-            {/* Text Part */}
-            <div className="lg:w-1/2 w-full">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-10 h-1 bg-blue-600 rounded-full"></span>
-                <span className="text-blue-600 font-bold uppercase tracking-wider text-sm">เกี่ยวกับผม</span>
-              </div>
-              <h2 className="text-3xl font-bold mb-6 text-slate-900">ผสานเทคโนโลยีสู่การเรียนรู้ <br/>เพื่ออนาคตของเด็กไทย</h2>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                ผมเชื่อว่า "คอมพิวเตอร์" ไม่ใช่แค่วิชาเรียน แต่เป็นเครื่องมือสำคัญที่จะช่วยเปิดโลกทัศน์ให้กับผู้เรียน 
-                ในฐานะครูคอมพิวเตอร์ ผมมุ่งมั่นที่จะเปลี่ยนเรื่องยากให้เป็นเรื่องง่าย และเปลี่ยนผู้ใช้งาน (Users) 
-                ให้กลายเป็นผู้สร้างสรรค์ (Creators)
-              </p>
-              <p className="text-slate-600 leading-relaxed mb-8">
-                ด้วยประสบการณ์ด้านการเขียนโปรแกรมและการจัดการเรียนรู้แบบ Active Learning 
-                ผมพร้อมที่จะนำทักษะเหล่านี้มาพัฒนาโรงเรียนและชุมชน
-              </p>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                  <div className="bg-blue-100 p-2 rounded-lg text-blue-600">
-                    <Users size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-800">เข้ากับผู้เรียน</h4>
-                    <p className="text-xs text-slate-500">เน้นผู้เรียนเป็นสำคัญ</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                  <div className="bg-green-100 p-2 rounded-lg text-green-600">
-                    <Monitor size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-800">ทันสมัย</h4>
-                    <p className="text-xs text-slate-500">อัปเดตเทคโนโลยีเสมอ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
-      </section>
+    </section>
 
-      {/* Education & Experience */}
-      <section id="education" className="py-20 bg-slate-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">เส้นทางการศึกษาและการทำงาน</h2>
-            <p className="text-slate-500">My Journey Timeline</p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            {/* Timeline Item 1 */}
-            <div className="flex flex-col md:flex-row gap-6 mb-12 relative">
-              <div className="md:w-1/3 text-right md:pr-8 pt-2">
-                <h3 className="text-xl font-bold text-slate-800">ครุศาสตรบัณฑิต</h3>
-                <p className="text-blue-600 font-medium">สาขาคอมพิวเตอร์ศึกษา</p>
-                <p className="text-slate-500 text-sm mt-1">2562 - 2566</p>
-              </div>
-              <div className="absolute left-4 md:left-1/3 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-md transform -translate-x-[2px] mt-3 z-10 hidden md:block"></div>
-              <div className="absolute left-4 md:left-1/3 w-0.5 h-full bg-slate-200 transform translate-x-[5px] top-4 hidden md:block"></div>
-              <div className="md:w-2/3 md:pl-8 bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-2 mb-2 text-slate-800 font-semibold">
-                  <GraduationCap size={18} className="text-blue-500" /> มหาวิทยาลัยราชภัฏ...
+    <section id="skills" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">ทักษะความสามารถ</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Programming</h3>
+                    <p>Python, HTML/CSS, JavaScript, Scratch</p>
                 </div>
-                <p className="text-slate-600 text-sm">
-                  เกียรตินิยมอันดับ 2 (GPAX 3.50) <br/>
-                  - ประธานชมรมคอมพิวเตอร์เพื่อการศึกษา <br/>
-                  - รางวัลชนะเลิศการประกวดสื่อการสอนดิจิทัล
-                </p>
-              </div>
-            </div>
-
-            {/* Timeline Item 2 */}
-            <div className="flex flex-col md:flex-row gap-6 mb-12 relative">
-              <div className="md:w-1/3 text-right md:pr-8 pt-2">
-                <h3 className="text-xl font-bold text-slate-800">ฝึกสอน</h3>
-                <p className="text-blue-600 font-medium">โรงเรียนมัธยม...</p>
-                <p className="text-slate-500 text-sm mt-1">2566</p>
-              </div>
-              <div className="absolute left-4 md:left-1/3 w-4 h-4 bg-cyan-500 rounded-full border-4 border-white shadow-md transform -translate-x-[2px] mt-3 z-10 hidden md:block"></div>
-              <div className="absolute left-4 md:left-1/3 w-0.5 h-full bg-slate-200 transform translate-x-[5px] top-4 hidden md:block"></div>
-              <div className="md:w-2/3 md:pl-8 bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-2 mb-2 text-slate-800 font-semibold">
-                  <Briefcase size={18} className="text-cyan-500" /> ปฏิบัติการสอนในสถานศึกษา
+                <div class="skill-card">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Network & Hardware</h3>
+                    <p>การซ่อมบำรุงคอมพิวเตอร์, การติดตั้งระบบเครือข่ายเบื้องต้น</p>
                 </div>
-                <p className="text-slate-600 text-sm">
-                  - สอนวิชาวิทยาการคำนวณ ระดับชั้น ม.1 และ ม.4 <br/>
-                  - ดูแลระบบเครือข่ายอินเทอร์เน็ตของโรงเรียน <br/>
-                  - จัดทำโครงการ "พี่สอนน้องเขียนโค้ด"
-                </p>
-              </div>
-            </div>
-
-             {/* Timeline Item 3 */}
-             <div className="flex flex-col md:flex-row gap-6 relative">
-              <div className="md:w-1/3 text-right md:pr-8 pt-2">
-                <h3 className="text-xl font-bold text-slate-800">ครูอัตราจ้าง</h3>
-                <p className="text-blue-600 font-medium">โรงเรียน...</p>
-                <p className="text-slate-500 text-sm mt-1">2567 - ปัจจุบัน</p>
-              </div>
-              <div className="absolute left-4 md:left-1/3 w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-md transform -translate-x-[2px] mt-3 z-10 hidden md:block"></div>
-              <div className="md:w-2/3 md:pl-8 bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-2 mb-2 text-slate-800 font-semibold">
-                  <Award size={18} className="text-indigo-500" /> ครูผู้สอนคอมพิวเตอร์
+                <div class="skill-card">
+                    <i class="fas fa-photo-video"></i>
+                    <h3>Multimedia</h3>
+                    <p>Photoshop, Canva, Premiere Pro (ตัดต่อวิดีโอสื่อการสอน)</p>
                 </div>
-                <p className="text-slate-600 text-sm">
-                  - รับผิดชอบงานทะเบียนวัดผลด้วยโปรแกรม Excel <br/>
-                  - ฝึกซ้อมนักเรียนแข่งขันทักษะคอมพิวเตอร์ระดับเขตพื้นที่ <br/>
-                  - พัฒนาเว็บไซต์ประชาสัมพันธ์โรงเรียน
-                </p>
-              </div>
+                 <div class="skill-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Teaching Tools</h3>
+                    <p>Google Workspace for Education, Kahoot, Quizizz</p>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-20 bg-slate-900 text-white relative overflow-hidden">
-        {/* Decorative Grid */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-slate-700 pb-4">
-            <div>
-              <h2 className="text-3xl font-bold mb-2">ทักษะและความสามารถ</h2>
-              <p className="text-slate-400">Technical & Professional Skills</p>
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">ภาพกิจกรรมและผลงาน</h2>
+            <div class="gallery-grid">
+                <img src="https://via.placeholder.com/300" alt="Activity 1">
+                <img src="https://via.placeholder.com/300" alt="Activity 2">
+                <img src="https://via.placeholder.com/300" alt="Activity 3">
+                <img src="https://via.placeholder.com/300" alt="Activity 4">
             </div>
-            <div className="flex gap-2 text-sm font-mono text-green-400 mt-4 md:mt-0">
-              <span>&lt;System&gt;</span>
-              <span>Ready to Deploy</span>
-              <span>&lt;/System&gt;</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Skill Card 1 */}
-            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-colors">
-              <div className="flex items-center gap-3 mb-4">
-                <Code className="text-blue-400" size={28} />
-                <h3 className="text-xl font-bold">Programming</h3>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <div className="flex justify-between text-sm mb-1"><span>Python / Scratch (สอนเด็ก)</span> <span className="text-blue-400">95%</span></div>
-                  <div className="h-2 bg-slate-700 rounded-full overflow-hidden"><div className="h-full bg-blue-500 w-[95%]"></div></div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-sm mb-1"><span>HTML / CSS / JS</span> <span className="text-blue-400">85%</span></div>
-                  <div className="h-2 bg-slate-700 rounded-full overflow-hidden"><div className="h-full bg-blue-500 w-[85%]"></div></div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-sm mb-1"><span>C / C++ / Java</span> <span className="text-blue-400">70%</span></div>
-                  <div className="h-2 bg-slate-700 rounded-full overflow-hidden"><div className="h-full bg-blue-500 w-[70%]"></div></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Skill Card 2 */}
-            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-cyan-500 transition-colors">
-              <div className="flex items-center gap-3 mb-4">
-                <Wifi className="text-cyan-400" size={28} />
-                <h3 className="text-xl font-bold">IT Support & Network</h3>
-              </div>
-              <div className="space-y-3">
-                <div className="text-sm text-slate-300 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>Hardware Troubleshooting</div>
-                <div className="text-sm text-slate-300 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>LAN / WiFi Network Setup</div>
-                <div className="text-sm text-slate-300 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>Printer & Peripheral Maintenance</div>
-                <div className="text-sm text-slate-300 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>OBEC School Systems</div>
-              </div>
-            </div>
-
-            {/* Skill Card 3 */}
-            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors">
-              <div className="flex items-center gap-3 mb-4">
-                <Cpu className="text-purple-400" size={28} />
-                <h3 className="text-xl font-bold">Software & Tools</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-slate-700 rounded text-sm text-slate-200">MS Office 365</span>
-                <span className="px-3 py-1 bg-slate-700 rounded text-sm text-slate-200">Google Workspace</span>
-                <span className="px-3 py-1 bg-slate-700 rounded text-sm text-slate-200">Canva for Education</span>
-                <span className="px-3 py-1 bg-slate-700 rounded text-sm text-slate-200">Photoshop</span>
-                <span className="px-3 py-1 bg-slate-700 rounded text-sm text-slate-200">Premiere Pro</span>
-                <span className="px-3 py-1 bg-slate-700 rounded text-sm text-slate-200">Kahoot / Quizizz</span>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      {/* Gallery Section */}
-      <section id="gallery" className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">ภาพกิจกรรมและผลงาน</h2>
-            <p className="text-slate-500">Gallery of Activities</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-             {/* Gallery Item 1 */}
-             <div className="group relative overflow-hidden rounded-xl shadow-lg aspect-video cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Teaching" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h4 className="text-white font-bold text-lg">การจัดการเรียนการสอน</h4>
-                  <p className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity">วิชาวิทยาการคำนวณ เน้นปฏิบัติจริง</p>
-                </div>
-             </div>
-
-             {/* Gallery Item 2 */}
-             <div className="group relative overflow-hidden rounded-xl shadow-lg aspect-video cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Training" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h4 className="text-white font-bold text-lg">วิทยากรโครงการ</h4>
-                  <p className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity">อบรมการใช้ Google Apps for Education ให้กับคณะครู</p>
-                </div>
-             </div>
-
-             {/* Gallery Item 3 */}
-             <div className="group relative overflow-hidden rounded-xl shadow-lg aspect-video cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maintenance" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h4 className="text-white font-bold text-lg">ดูแลระบบ ICT</h4>
-                  <p className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity">ซ่อมบำรุงและดูแลห้องปฏิบัติการคอมพิวเตอร์</p>
-                </div>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-slate-50 border-t border-slate-200">
-        <div className="container mx-auto px-6">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
-            <div className="bg-blue-600 p-10 text-white md:w-2/5 flex flex-col justify-between">
-              <div>
-                <h2 className="text-3xl font-bold mb-4">ติดต่อผม</h2>
-                <p className="text-blue-100 mb-8">
-                  หากท่านต้องการข้อมูลเพิ่มเติม หรือเอกสารประกอบการพิจารณา สามารถติดต่อได้ตลอดเวลาครับ
-                </p>
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Phone className="text-blue-200" />
-                  <span>08X-XXX-XXXX</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="text-blue-200" />
-                  <span>teacher.contact@email.com</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="text-blue-200" />
-                  <span>อ.เมือง จ.ขอนแก่น</span>
-                </div>
-              </div>
+    <footer id="contact">
+        <div class="container">
+            <h2>พร้อมที่จะร่วมงานกับโรงเรียนท้องถิ่น</h2>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fas fa-envelope"></i> email@example.com</a>
+                <a href="#"><i class="fas fa-phone"></i> 08X-XXX-XXXX</a>
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
             </div>
-            
-            <div className="p-10 md:w-3/5 flex flex-col justify-center items-center text-center">
-              <h3 className="text-xl font-bold text-slate-800 mb-6">เชื่อมต่อกับผม</h3>
-              <div className="flex gap-4 mb-8">
-                <a href="#" className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all">
-                  <Facebook size={24} />
-                </a>
-                <a href="#" className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-blue-700 hover:bg-blue-700 hover:text-white transition-all">
-                  <Linkedin size={24} />
-                </a>
-                <a href="#" className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-pink-600 hover:bg-pink-600 hover:text-white transition-all">
-                   <Users size={24} />
-                </a>
-              </div>
-              <p className="text-slate-400 text-sm">
-                © 2024 Teacher Portfolio Design by Gemini
-              </p>
-            </div>
-          </div>
+            <p>&copy; 2024 Teacher Computer Portfolio. Designed by Me.</p>
         </div>
-      </section>
-    </div>
-  );
-};
+    </footer>
 
-export default App;
+    <script src="script.js"></script>
+</body>
+</html>
