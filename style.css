@@ -256,3 +256,133 @@ footer {
         display: none; /* ซ่อนเมนูไว้ก่อนสำหรับมือถือ */
     }
 }
+
+.modal {
+    display: none; /* ซ่อนไว้ก่อน */
+    position: fixed;
+    z-index: 2000; /* ให้ลอยเหนือ Navbar */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85); /* สีดำโปร่งแสง */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* คลาสสำหรับสั่งให้โชว์ Modal */
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* --- Image Modal Style --- */
+.modal-content-img {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh; /* สูงไม่เกิน 90% ของจอ */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    animation: zoomIn 0.3s;
+}
+
+/* --- Skill Modal Style --- */
+.modal-content-box {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    animation: slideUp 0.3s;
+}
+
+.modal-content-box i {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.modal-content-box h2 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.modal-content-box p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* ปุ่มปิด (X) */
+.close-modal, .close-modal-skill {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-modal-skill {
+    color: #333; /* ปุ่มปิดในกล่องขาวต้องสีเข้ม */
+    top: 10px;
+    right: 15px;
+}
+
+.close-modal:hover,
+.close-modal-skill:hover {
+    color: var(--accent);
+}
+
+/* Animation */
+@keyframes zoomIn {
+    from {transform: scale(0.5)} 
+    to {transform: scale(1)}
+}
+
+@keyframes slideUp {
+    from {transform: translateY(50px); opacity: 0;} 
+    to {transform: translateY(0); opacity: 1;}
+}
+
+
+.skill-level-container {
+    margin-top: 25px;
+    text-align: left; /* จัดข้อความชิดซ้าย */
+    width: 100%;
+}
+
+.level-info {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 8px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background-color: #e5e7eb; /* สีเทาพื้นหลังหลอด */
+    border-radius: 10px;
+    overflow: hidden; /* ตัดส่วนเกินที่ล้น */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%; /* เริ่มต้นที่ 0 แล้วค่อยวิ่ง */
+    background: linear-gradient(90deg, var(--primary-color), #60a5fa); /* ไล่สีสวยๆ */
+    border-radius: 10px;
+    transition: width 1s cubic-bezier(0.1, 0.7, 1.0, 0.1); /* เอฟเฟกต์วิ่ง */
+}
